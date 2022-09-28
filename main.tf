@@ -46,7 +46,7 @@ data "oci_core_image" "ubuntu" {
 
 data "oci_core_image_shape" "arm" {
   #Required
-  image_id   = oci_core_image.ubuntu.id
+  image_id   = data.oci_core_image.ubuntu.id
   shape_name = "VM.Standard.A1.Flex"
 }
 
