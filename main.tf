@@ -82,6 +82,11 @@ resource "oci_core_instance" "arm" {
     subnet_id = oci_core_subnet.hashistack.id
   }
 
+  shape_config {
+    ocpus = 2
+    memory_in_gbs = 12
+  }
+
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
   }
