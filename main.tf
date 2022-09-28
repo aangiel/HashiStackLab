@@ -66,15 +66,9 @@ data "oci_identity_availability_domain" "ad2" {
 resource "oci_core_instance" "arm" {
   availability_domain = data.oci_identity_availability_domain.ad2.id
   compartment_id      = var.compartment_ocid
-  display_name        = "arm"
   shape               = data.oci_core_image_shape.arm.id
 
-  # metadata = {
-  #       ssh_authorized_keys = file("./arturangiel_rsa.pub")
-  #   }
-
   source_details {
-
     source_type = "image"
     source_id   = data.oci_core_image.ubuntu.id
   }
