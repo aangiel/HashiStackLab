@@ -18,11 +18,6 @@ variable "fingerprint" {
   type        = string
 }
 
-variable "private_key_path" {
-  description = "The path to the user's private key."
-  type        = string
-}
-
 variable "private_key" {
   description = "Private key"
   type        = string
