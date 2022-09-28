@@ -93,6 +93,26 @@ resource "oci_core_instance" "arm" {
   }
 }
 
+resource "oci_core_instance" "amd" {
+  availability_domain = data.oci_identity_availability_domain.ad2.name
+  compartment_id      = var.compartment_ocid
+  shape               = var.amd_shape_name
+  count = 2
+
+  source_details {
+    source_type = "image"
+    source_id   = var.image_ocid
+  }
+
+  create_vnic_details {
+    subnet_id = oci_core_subnet.hashistack.id
+  }
+
+  metadata = {
+    ssh_authorized_keys = var.ssh_public_key
+  }
+}
+
 # resource "oci_core_instance" "amd" {
 #   availability_domain = data.oci_identity_availability_domains.ad1.id
 #   compartment_id      = var.compartment_ocid
