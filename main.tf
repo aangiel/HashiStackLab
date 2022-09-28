@@ -22,8 +22,8 @@ variable "compartment_ocid" {
 variable "ssh_public_key" {
 }
 
-variable "ssh_private_key" {
-}
+# variable "ssh_private_key" {
+# }
 
 provider "oci" {
   tenancy_ocid     = var.tenancy_ocid
