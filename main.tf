@@ -134,9 +134,9 @@ resource "oci_core_instance" "test_instance" {
     ssh_authorized_keys = var.ssh_public_key
     user_data           = base64encode(file("./userdata/bootstrap"))
   }
-  defined_tags = {
-    "${oci_identity_tag_namespace.tag-namespace1.name}.${oci_identity_tag.tag2.name}" = "awesome-app-server"
-  }
+  # defined_tags = {
+  #   "${oci_identity_tag_namespace.tag-namespace1.name}.${oci_identity_tag.tag2.name}" = "awesome-app-server"
+  # }
 
   freeform_tags = {
     "freeformkey${count.index}" = "freeformvalue${count.index}"
@@ -241,10 +241,10 @@ data "oci_core_boot_volume_attachments" "test_boot_volume_attachments" {
 }
 */
 
-# data "oci_core_instance_devices" "test_instance_devices" {
-#   count       = var.num_instances
-#   instance_id = oci_core_instance.test_instance[count.index].id
-# }
+data "oci_core_instance_devices" "test_instance_devices" {
+  count       = var.num_instances
+  instance_id = oci_core_instance.test_instance[count.index].id
+}
 
 # data "oci_core_volume_backup_policies" "test_predefined_volume_backup_policies" {
 #   filter {
