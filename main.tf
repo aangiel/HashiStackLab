@@ -44,6 +44,15 @@ data "oci_core_image" "ubuntu" {
   image_id = var.image_ocid
 }
 
+data "oci_core_images" "images" {
+    #Required
+    compartment_id = var.compartment_ocid
+    operating_system = "Ubuntu"
+    operating_system_version = "22.04"
+    sort_by = "TIMECREATED"
+    sort_order = "DESC"
+}
+
 data "oci_core_image_shape" "arm" {
   #Required
   image_id   = data.oci_core_image.ubuntu.id
@@ -70,7 +79,7 @@ resource "oci_core_instance" "arm" {
 
   source_details {
     source_type = "image"
-    source_id   = data.oci_core_image.ubuntu.id
+    source_id   = data.oci_core_images.images[0].id
   }
 
   create_vnic_details {
