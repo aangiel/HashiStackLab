@@ -7,4 +7,4 @@ compartment_ocid  = "ocid1.tenancy.oc1..aaaaaaaacechntip7cnbvvfzwif567tvvtofetxi
 vcn_cidr_block    = "10.0.0.0/16"
 subnet_cidr_block = "10.0.1.0/24"
 ssh_public_key    = "~/.ssh/openstack.pub"
-image_ocid        = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaab7wzikexyvn5vv5goyi3sgq7bx4ndwjiw6out2rvnheuaupwopba"
+image_ocid        = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaj6g2lci5ed7nfhk46olwkhmwkzrobyo3jntnhkk7fnm2vqflorna"
