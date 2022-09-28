@@ -69,9 +69,9 @@ resource "oci_core_instance" "arm" {
   display_name        = "arm"
   shape               = data.oci_core_image_shape.arm.id
 
-  metadata = {
-        ssh_authorized_keys = file("./arturangiel_rsa.pub")
-    }
+  # metadata = {
+  #       ssh_authorized_keys = file("./arturangiel_rsa.pub")
+  #   }
 
   source_details {
 
