@@ -3,7 +3,7 @@ provider "oci" {
   user_ocid    = var.user_ocid
   fingerprint  = var.fingerprint
   region       = var.region
-  private_key = var.private_key
+  private_key  = var.private_key
 }
 
 resource "oci_core_vcn" "hashistack" {
@@ -45,12 +45,12 @@ data "oci_core_image" "ubuntu" {
 }
 
 data "oci_core_images" "images" {
-    #Required
-    compartment_id = var.compartment_ocid
-    operating_system = "Ubuntu"
-    operating_system_version = "22.04"
-    sort_by = "TIMECREATED"
-    sort_order = "DESC"
+  #Required
+  compartment_id           = var.compartment_ocid
+  operating_system         = "Ubuntu"
+  operating_system_version = "22.04"
+  sort_by                  = "TIMECREATED"
+  sort_order               = "DESC"
 }
 
 data "oci_core_image_shape" "arm" {
@@ -67,7 +67,7 @@ data "oci_core_image_shape" "amd" {
 
 data "oci_identity_availability_domain" "ad2" {
   compartment_id = var.tenancy_ocid
-  ad_number = 2
+  ad_number      = 2
 }
 
 
