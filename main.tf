@@ -57,14 +57,14 @@ data "oci_core_image_shape" "amd" {
 }
 
 data "oci_identity_availability_domain" "ad2" {
-  compartment_id = var.compartment_ocid
-  id = "iAGY:EU-FRANKFURT-1-AD-2"
+  compartment_id = var.tenancy
+  ad_number = 2
 }
 
 
 
 resource "oci_core_instance" "arm" {
-  availability_domain = "iAGY:EU-FRANKFURT-1-AD-2"
+  availability_domain = data.oci_identity_availability_domain.ad2
   compartment_id      = var.compartment_ocid
   shape               = data.oci_core_image_shape.arm.id
 
