@@ -3,7 +3,9 @@ provider "oci" {
   user_ocid    = var.user_ocid
   fingerprint  = var.fingerprint
   region       = var.region
-  private_key  = var.private_key
+  # private_key  = var.private_key
+private_key = file("./private_key.pem")
+
 }
 
 resource "oci_core_vcn" "hashistack" {
