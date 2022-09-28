@@ -69,9 +69,9 @@ resource "oci_core_instance" "arm" {
   display_name        = "arm"
   shape               = data.oci_core_image_shape.arm.id
 
-  metadata = { "ssh_authorized_keys" : "var.ssh_public_key" }
-
+  metadata = "{ \"ssh_authorized_keys\" : \"var.ssh_public_key\" }"
   source_details {
+
     source_type = "image"
     source_id   = data.oci_core_image.ubuntu.id
   }
