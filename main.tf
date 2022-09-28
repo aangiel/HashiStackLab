@@ -61,6 +61,11 @@ variable "amd_shape_name" {
   default = "VM.Standard.E2.1.Micro"
 }
 
+data "oci_identity_availability_domain" "ad1" {
+  compartment_id = var.tenancy_ocid
+  ad_number      = 1
+}
+
 data "oci_identity_availability_domain" "ad2" {
   compartment_id = var.tenancy_ocid
   ad_number      = 2
@@ -94,7 +99,7 @@ resource "oci_core_instance" "arm" {
 }
 
 resource "oci_core_instance" "amd" {
-  availability_domain = data.oci_identity_availability_domain.ad2.name
+  availability_domain = data.oci_identity_availability_domain.ad1.name
   compartment_id      = var.compartment_ocid
   shape               = var.amd_shape_name
   count = 2
