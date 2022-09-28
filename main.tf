@@ -64,7 +64,7 @@ data "oci_identity_availability_domain" "ad2" {
 
 
 resource "oci_core_instance" "arm" {
-  availability_domain = data.oci_identity_availability_domains.ad2.id
+  availability_domain = data.oci_identity_availability_domain.ad2.id
   compartment_id      = var.compartment_ocid
   display_name        = "arm"
   image               = data.oci_core_image.ubuntu.id
