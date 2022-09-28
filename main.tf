@@ -24,14 +24,14 @@ resource "oci_core_subnet" "hashistack" {
 }
 
 
-data "oci_core_shape_management" "arm" {
+resource "oci_core_shape_management" "arm" {
   # availability_domain = data.oci_identity_availability_domain.ad1.name
   compartment_id = var.compartment_ocid
   shape_name     = "VM.Standard.A1.Flex"
   image_id       = var.image_ocid
 }
 
-data "oci_core_shape_management" "amd64" {
+resource "oci_core_shape_management" "amd64" {
   # availability_domain = data.oci_identity_availability_domain.ad1.name
   compartment_id = var.compartment_ocid
   shape_name     = "VM.Standard.E2.1.Micro"
