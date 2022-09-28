@@ -71,7 +71,7 @@ resource "oci_core_instance" "arm" {
   shape               = data.oci_core_image_shape.arm.id
   subnet_id           = oci_core_subnet.hashistack.id
 
-  metadata {
+  metadata = {
     ssh_authorized_keys = var.ssh_public_key
   }
 }
