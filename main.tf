@@ -50,6 +50,12 @@ data "oci_core_image_shape" "arm" {
   shape_name = "VM.Standard.A1.Flex"
 }
 
+data "oci_core_image_shape" "amd" {
+  #Required
+  image_id   = data.oci_core_image.ubuntu.id
+  shape_name = "VM.Standard.E2.1.Micro"
+}
+
 data "oci_identity_availability_domain" "ad2" {
   compartment_id = var.compartment_ocid
   ad_number      = 2
@@ -57,18 +63,18 @@ data "oci_identity_availability_domain" "ad2" {
 
 
 
-# resource "oci_core_instance" "arm" {
-#   availability_domain = data.oci_identity_availability_domains.ad1.id
-#   compartment_id      = var.compartment_ocid
-#   display_name        = "arm"
-#   image               = data.oci_core_images.arm.id
-#   shape               = data.oci_core_shape.arm.id
-#   subnet_id           = oci_core_subnet.hashistack.id
+resource "oci_core_instance" "arm" {
+  availability_domain = data.oci_identity_availability_domains.ad2.id
+  compartment_id      = var.compartment_ocid
+  display_name        = "arm"
+  image               = data.oci_core_image.ubuntu.id
+  shape               = data.oci_core_image_shape.arm.id
+  subnet_id           = oci_core_subnet.hashistack.id
 
-#   metadata {
-#     ssh_authorized_keys = var.ssh_public_key
-#   }
-# }
+  metadata {
+    ssh_authorized_keys = var.ssh_public_key
+  }
+}
 
 # resource "oci_core_instance" "amd" {
 #   availability_domain = data.oci_identity_availability_domains.ad1.id
