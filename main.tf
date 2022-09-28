@@ -24,17 +24,17 @@ resource "oci_core_subnet" "hashistack" {
 }
 
 
-# data "oci_core_shape" "arm" {
-#   availability_domain = data.oci_identity_availability_domain.ad1.name
-#   compartment_id      = var.compartment_ocid
-#   name                = "VM.Standard.A1.Flex"
-# }
+data "oci_core_shape" "arm" {
+  availability_domain = data.oci_identity_availability_domain.ad1.name
+  compartment_id      = var.compartment_ocid
+  name                = "VM.Standard.A1.Flex"
+}
 
-# data "oci_core_shape" "amd64" {
-#   availability_domain = data.oci_identity_availability_domain.ad1.name
-#   compartment_id      = var.compartment_ocid
-#   name                = "VM.Standard.E2.1.Micro"
-# }
+data "oci_core_shape" "amd64" {
+  availability_domain = data.oci_identity_availability_domain.ad1.name
+  compartment_id      = var.compartment_ocid
+  name                = "VM.Standard.E2.1.Micro"
+}
 
 data "oci_identity_availability_domain" "ad1" {
   compartment_id = var.compartment_ocid
