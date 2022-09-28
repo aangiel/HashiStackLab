@@ -1,5 +1,5 @@
 tenancy_ocid      = "ocid1.tenancy.oc1..aaaaaaaacechntip7cnbvvfzwif567tvvtofetxivwwtjnssufafytq3t3mq"
-user_ocid         = "ocid1.user.oc1..aaaaaaaar4a4kuhb7jcuhflt7k2nik6xwosp6o2uam6okwpslgans7ytxbaa"
+user_ocid         = "ocid1.user.oc1..aaaaaaaascerkl6wvcsdv6erlr5srah5qm2nauyxlheqynfdhy4av2myrzba"
 fingerprint       = "7c:e0:ce:4e:31:d3:5c:68:83:62:6c:f1:9a:c6:aa:43"
 private_key_path  = "~/.oci/oci_api_key.pem"
 region            = "eu-frankfurt-1"
