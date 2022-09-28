@@ -1,15 +1,45 @@
+variable "tenancy_ocid" {
+  description = "The OCID of the tenancy."
+  type        = string
+}
+
+variable "user_ocid" {
+  description = "The OCID of the user."
+  type        = string
+}
+
+variable "fingerprint" {
+  description = "The fingerprint of the user's private key."
+  type        = string
+}
+
+variable "private_key_path" {
+  description = "The path to the user's private key."
+  type        = string
+}
+
 variable "region" {
-  description = "AWS region"
-  default     = "us-west-1"
+  description = "The region to connect to."
+  type        = string
 }
 
-variable "instance_type" {
-  description = "Type of EC2 instance to provision"
-  default     = "t2.micro"
+variable "compartment_ocid" {
+  description = "The OCID of the compartment."
+  type        = string
 }
 
-variable "instance_name" {
-  description = "EC2 instance name"
-  default     = "Provisioned by Terraform"
+variable "subnet_cidr_block" {
+  description = "The CIDR block for the subnet."
+  type        = string
 }
 
+variable "vcn_cidr_block" {
+  description = "The CIDR block for the VCN."
+  type        = string
+}
+
+
+variable "ssh_public_key" {
+  description = "The SSH public key to add to the root user."
+  type        = string
+}
