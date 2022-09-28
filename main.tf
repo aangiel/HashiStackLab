@@ -101,7 +101,7 @@ resource "oci_core_instance" "amd" {
 
   source_details {
     source_type = "image"
-    source_id   = var.image_ocid
+    source_id   = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7wq4opozz63gwzrolqmalwadtckpke5ehhxh634myjquvwlzetyq"
   }
 
   create_vnic_details {
