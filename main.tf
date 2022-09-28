@@ -57,7 +57,7 @@ data "oci_core_image_shape" "amd" {
 }
 
 data "oci_identity_availability_domain" "ad2" {
-  compartment_id = var.tenancy
+  compartment_id = var.tenancy_ocid
   ad_number = 2
 }
 
