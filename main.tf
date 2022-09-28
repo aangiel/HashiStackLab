@@ -72,6 +72,7 @@ resource "oci_core_instance" "arm" {
   availability_domain = data.oci_identity_availability_domain.ad2.name
   compartment_id      = var.compartment_ocid
   shape               = var.arm_shape_name
+  count = 2
 
   source_details {
     source_type = "image"
