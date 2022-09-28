@@ -8,6 +8,11 @@ variable "user_ocid" {
   type        = string
 }
 
+variable "image_ocid" {
+  description = "The OCID of the image."
+  type        = string
+}
+
 variable "fingerprint" {
   description = "The fingerprint of the user's private key."
   type        = string

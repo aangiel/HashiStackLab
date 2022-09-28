@@ -1,9 +1,9 @@
 provider "oci" {
-  tenancy_ocid     = var.tenancy_ocid
-  user_ocid        = var.user_ocid
-  fingerprint      = var.fingerprint
-  private_key      = var.private_key
-  region           = var.region
+  tenancy_ocid = var.tenancy_ocid
+  user_ocid    = var.user_ocid
+  fingerprint  = var.fingerprint
+  private_key  = var.private_key
+  region       = var.region
 }
 
 resource "oci_core_vcn" "hashistack" {
@@ -24,16 +24,19 @@ resource "oci_core_subnet" "hashistack" {
 }
 
 
-data "oci_core_shape" "arm" {
-  availability_domain = data.oci_identity_availability_domain.ad1.name
-  compartment_id      = var.compartment_ocid
-  name                = "VM.Standard.A1.Flex"
+data "oci_core_shape_management" "arm" {
+  # availability_domain = data.oci_identity_availability_domain.ad1.name
+  compartment_id = var.compartment_ocid
+  shape_name     = "VM.Standard.A1.Flex"
+  image_id       = var.image_ocid
 }
 
-data "oci_core_shape" "amd64" {
-  availability_domain = data.oci_identity_availability_domain.ad1.name
-  compartment_id      = var.compartment_ocid
-  name                = "VM.Standard.E2.1.Micro"
+data "oci_core_shape_management" "amd64" {
+  # availability_domain = data.oci_identity_availability_domain.ad1.name
+  compartment_id = var.compartment_ocid
+  shape_name     = "VM.Standard.E2.1.Micro"
+  image_id       = var.image_ocid
+
 }
 
 data "oci_identity_availability_domain" "ad1" {
