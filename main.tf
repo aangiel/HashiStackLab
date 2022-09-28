@@ -58,7 +58,7 @@ data "oci_core_image_shape" "amd" {
 
 data "oci_identity_availability_domain" "ad2" {
   compartment_id = var.compartment_ocid
-  ad_number      = 2
+  id = "iAGY:EU-FRANKFURT-1-AD-2"
 }
 
 
