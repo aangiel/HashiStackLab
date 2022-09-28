@@ -53,16 +53,12 @@ data "oci_core_images" "images" {
   sort_order               = "DESC"
 }
 
-data "oci_core_image_shape" "arm" {
-  #Required
-  image_id   = data.oci_core_image.ubuntu.id
-  shape_name = "VM.Standard.A1.Flex"
+variable "arm_shape_name" {
+  default = "VM.Standard.A1.Flex"
 }
 
-data "oci_core_image_shape" "amd" {
-  #Required
-  image_id   = data.oci_core_image.ubuntu.id
-  shape_name = "VM.Standard.E2.1.Micro"
+variable "amd_shape_name" {
+  default = "VM.Standard.E2.1.Micro"
 }
 
 data "oci_identity_availability_domain" "ad2" {
@@ -75,15 +71,19 @@ data "oci_identity_availability_domain" "ad2" {
 resource "oci_core_instance" "arm" {
   availability_domain = data.oci_identity_availability_domain.ad2.name
   compartment_id      = var.compartment_ocid
-  shape               = data.oci_core_image_shape.arm.id
+  shape               = var.arm_shape_name
 
   source_details {
     source_type = "image"
-    source_id   = data.oci_core_images.images.id
+    source_id   = var.image_ocid
   }
 
   create_vnic_details {
     subnet_id = oci_core_subnet.hashistack.id
+  }
+
+  metadata = {
+    ssh_authorized_keys = var.ssh_public_key
   }
 }
 
