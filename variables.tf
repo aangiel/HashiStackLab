@@ -18,6 +18,11 @@ variable "private_key_path" {
   type        = string
 }
 
+variable "private_key" {
+  description = "Private key"
+  type        = string
+}
+
 variable "region" {
   description = "The region to connect to."
   type        = string
