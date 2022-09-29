@@ -28,34 +28,8 @@ resource "oci_core_subnet" "hashistack" {
   vcn_id         = oci_core_vcn.hashistack.id
 }
 
-
-# resource "oci_core_shape_management" "arm" {
-#   # availability_domain = data.oci_identity_availability_domain.ad1.name
-#   compartment_id = var.compartment_ocid
-#   shape_name     = "VM.Standard.A1.Flex"
-#   image_id       = var.image_ocid
-# }
-
-# resource "oci_core_shape_management" "amd64" {
-#   # availability_domain = data.oci_identity_availability_domain.ad1.name
-#   compartment_id = var.compartment_ocid
-#   shape_name     = "VM.Standard.E2.1.Micro"
-#   image_id       = var.image_ocid
-
-# }
-
 data "oci_core_image" "ubuntu" {
-  #Required
   image_id = var.image_ocid
-}
-
-data "oci_core_images" "images" {
-  #Required
-  compartment_id           = var.compartment_ocid
-  operating_system         = "Ubuntu"
-  operating_system_version = "22.04"
-  sort_by                  = "TIMECREATED"
-  sort_order               = "DESC"
 }
 
 variable "arm_shape_name" {
@@ -123,18 +97,7 @@ resource "oci_core_instance" "amd" {
   }
 }
 
-# resource "oci_core_instance" "amd" {
-#   availability_domain = data.oci_identity_availability_domains.ad1.id
-#   compartment_id      = var.compartment_ocid
-#   display_name        = "amd"
-#   image               = data.oci_core_images.amd64.id
-#   shape               = data.oci_core_shape.amd64
-#   subnet_id           = oci_core_subnet.hashistack.id
-
-#   metadata {
-#     ssh_authorized_keys = var.ssh_public_key
-#   }
-# }
+# ===========Google====================
 
 
 resource "google_compute_instance" "test" {
