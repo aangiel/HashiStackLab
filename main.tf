@@ -50,13 +50,13 @@ resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
 
 }
 
-resource "oci_bastion_bastion" "hashistack_bastion" {
-  bastion_type                 = "standard"
-  compartment_id               = var.tenancy_ocid
-  target_subnet_id             = oci_core_subnet.hashistack.id
-  name                         = "HashiStackBastion"
-  client_cidr_block_allow_list = ["0.0.0.0/0"]
-}
+# resource "oci_bastion_bastion" "hashistack_bastion" {
+#   bastion_type                 = "standard"
+#   compartment_id               = var.tenancy_ocid
+#   target_subnet_id             = oci_core_subnet.hashistack.id
+#   name                         = "HashiStackBastion"
+#   client_cidr_block_allow_list = ["0.0.0.0/0"]
+# }
 
 data "oci_core_image" "ubuntu" {
   image_id = var.image_ocid
@@ -106,6 +106,13 @@ resource "oci_core_instance" "arm" {
     ssh_authorized_keys = var.ssh_public_key
     user_data           = base64encode(file("./user-data"))
   }
+}
+
+resource "oci_objectstorage_bucket" "hashi_vault_bucket" {
+  #Required
+  compartment_id = var.compartment_ocid
+  name           = "HashiVaultBucket"
+  namespace      = "frjiduquf3wj"
 }
 
 resource "oci_core_instance" "amd" {
