@@ -22,23 +22,38 @@ resource "oci_core_vcn" "hashistack" {
 }
 
 resource "oci_core_subnet" "hashistack" {
-  display_name   = "HashiStack"
-  dns_label      = "hashistacksn"
-  cidr_block     = var.subnet_cidr_block
-  compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_vcn.hashistack.id
-  route_table_id = oci_core_route_table.hashistack_route_table.id
+  display_name      = "HashiStack"
+  dns_label         = "hashistacksn"
+  cidr_block        = var.subnet_cidr_block
+  compartment_id    = var.compartment_ocid
+  vcn_id            = oci_core_vcn.hashistack.id
+  route_table_id    = oci_core_route_table.hashistack_route_table.id
   security_list_ids = [oci_core_security_list.hashistack_sec_list.id]
 }
 
 resource "oci_core_security_list" "hashistack_sec_list" {
   compartment_id = var.compartment_ocid
-  display_name = "HashiStack Security List"
+  display_name   = "HashiStack Security List"
   vcn_id         = oci_core_vcn.hashistack.id
 
   ingress_security_rules {
     protocol = "6"
-    source = "0.0.0.0/0"
+    source   = "0.0.0.0/0"
+  }
+
+  ingress_security_rules {
+    protocol = "17"
+    source   = "0.0.0.0/0"
+  }
+
+  egress_security_rules {
+    protocol    = "6"
+    destination = "0.0.0.0/0"
+  }
+
+  egress_security_rules {
+    protocol    = "17"
+    destination = "0.0.0.0/0"
   }
 }
 
