@@ -6,6 +6,11 @@ provider "oci" {
   private_key  = var.private_key
 }
 
+provider "google" {
+  project = "total-well-310016"
+  region = "us-east1"
+}
+
 resource "oci_core_vcn" "hashistack" {
 
   compartment_id = var.compartment_ocid
@@ -130,4 +135,31 @@ resource "oci_core_instance" "amd" {
 #     ssh_authorized_keys = var.ssh_public_key
 #   }
 # }
+
+
+resource "google_compute_instance" "test" {
+  name         = "test"
+  machine_type = "e2-micro"
+  zone         = "us-east1-b"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      type = "pd-standard"
+    }
+  }
+
+  // Local SSD disk
+  scratch_disk {
+    interface = "SCSI"
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral public IP
+    }
+  }
+}
 
