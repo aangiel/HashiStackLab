@@ -168,24 +168,24 @@ resource "oci_core_instance" "amd" {
 # ===========Google====================
 
 
-resource "google_compute_instance" "test" {
-  name         = "test"
-  machine_type = "e2-micro"
-  zone         = "us-east1-b"
+# resource "google_compute_instance" "test" {
+#   name         = "test"
+#   machine_type = "e2-micro"
+#   zone         = "us-east1-b"
 
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-      type  = "pd-standard"
-    }
-  }
+#   boot_disk {
+#     initialize_params {
+#       image = "debian-cloud/debian-11"
+#       type  = "pd-standard"
+#     }
+#   }
 
-  network_interface {
-    network = "default"
+#   network_interface {
+#     network = "default"
 
-    access_config {
-      // Ephemeral public IP
-    }
-  }
-}
+#     access_config {
+#       // Ephemeral public IP
+#     }
+#   }
+# }
 
