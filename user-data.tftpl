@@ -6,7 +6,7 @@ bootcmd:
 
 runcmd:
   - mkdir -p /vault/data
-  - vault server -config=/vault/vault-config.hcl
+  - vault server -config=/home/ubuntu/vault/vault-config.hcl
 
 
 package_update: true
@@ -25,8 +25,8 @@ snap:
 write_files:
 - content: |
     storage "raft" {
-      path    = "/vault/data"
-      node_id = ${node_id}
+      path    = "/home/ubuntu/vault/data"
+      node_id = "${node_id}"
     }
 
     listener "tcp" {
@@ -37,6 +37,7 @@ write_files:
     api_addr = "http://127.0.0.1:8200"
     cluster_addr = "https://127.0.0.1:8201"
     ui = true
-  path: /vault/vault-config.hcl
+  path: /home/ubuntu/vault/vault-config.hcl
+  ownwer: ubuntu:ubuntu
   
 
