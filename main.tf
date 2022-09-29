@@ -23,7 +23,7 @@ resource "oci_core_vcn" "hashistack" {
 
 resource "oci_core_subnet" "hashistack" {
   display_name   = "HashiStack"
-  dns_label      = "hashistack-sn"
+  dns_label      = "hashistacksn"
   cidr_block     = var.subnet_cidr_block
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.hashistack.id
