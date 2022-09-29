@@ -28,34 +28,25 @@ resource "oci_core_subnet" "hashistack" {
   compartment_id    = var.compartment_ocid
   vcn_id            = oci_core_vcn.hashistack.id
   route_table_id    = oci_core_route_table.hashistack_route_table.id
-  # security_list_ids = [oci_core_security_list.hashistack_sec_list.id]
+  security_list_ids = [oci_core_vcn.default_security_list_id, oci_core_security_list.hashistack_sec_list.id]
 }
 
-# resource "oci_core_security_list" "hashistack_sec_list" {
-#   compartment_id = var.compartment_ocid
-#   display_name   = "HashiStack Security List"
-#   vcn_id         = oci_core_vcn.hashistack.id
+resource "oci_core_security_list" "hashistack_sec_list" {
+  compartment_id = var.compartment_ocid
+  display_name   = "HashiStack Security List"
+  vcn_id         = oci_core_vcn.hashistack.id
 
-#   ingress_security_rules {
-#     protocol = "6"
-#     source   = "0.0.0.0/0"
-#   }
-
-#   ingress_security_rules {
-#     protocol = "17"
-#     source   = "0.0.0.0/0"
-#   }
-
-#   egress_security_rules {
-#     protocol    = "6"
-#     destination = "0.0.0.0/0"
-#   }
-
-#   egress_security_rules {
-#     protocol    = "17"
-#     destination = "0.0.0.0/0"
-#   }
-# }
+  ingress_security_rules {
+    protocol = "6" # TCP
+    source   = "0.0.0.0/0"
+    tcp_options {
+      source_port_range {
+        min = 8200
+        max = 8200
+      }
+    }
+  }
+}
 
 resource "oci_core_route_table" "hashistack_route_table" {
   vcn_id         = oci_core_vcn.hashistack.id
