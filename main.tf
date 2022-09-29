@@ -36,8 +36,8 @@ resource "oci_core_route_table" "hashistack_route_table" {
   display_name   = "Hashistack Route Table"
 
   route_rules {
-    destination      = "0.0.0.0/0"
-    destination_type = "CIDR_BLOCK"
+    destination       = "0.0.0.0/0"
+    destination_type  = "CIDR_BLOCK"
     network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
   }
 
@@ -45,16 +45,16 @@ resource "oci_core_route_table" "hashistack_route_table" {
 
 resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
   compartment_id = var.tenancy_ocid
-  display_name = "HashiStack Internet Gateway"
+  display_name   = "HashiStack Internet Gateway"
   vcn_id         = oci_core_vcn.hashistack.id
 
 }
 
 resource "oci_bastion_bastion" "hashistack_bastion" {
-	bastion_type = "standard"
-	compartment_id = var.tenancy_ocid
-	target_subnet_id = oci_core_subnet.hashistack.id
-	name = "HashiStackBastion"
+  bastion_type                 = "standard"
+  compartment_id               = var.tenancy_ocid
+  target_subnet_id             = oci_core_subnet.hashistack.id
+  name                         = "HashiStackBastion"
   client_cidr_block_allow_list = ["0.0.0.0/0"]
 }
 
@@ -124,6 +124,7 @@ resource "oci_core_instance" "amd" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
+    user_data           = base64encode(file("./user-data"))
   }
 }
 
