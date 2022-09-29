@@ -5,8 +5,8 @@ bootcmd:
   - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
 runcmd:
-  - mkdir -p ~/vault/data
-  - vault server -config=~/vault-config.hcl
+  - mkdir -p /vault/data
+  - vault server -config=/vault/vault-config.hcl
 
 
 package_update: true
@@ -25,7 +25,7 @@ snap:
 write_files:
 - content: |
     storage "raft" {
-      path    = "./vault/data"
+      path    = "/vault/data"
       node_id = ${node_id}
     }
 
@@ -37,6 +37,6 @@ write_files:
     api_addr = "http://127.0.0.1:8200"
     cluster_addr = "https://127.0.0.1:8201"
     ui = true
-  path: ~/vault-config.hcl
+  path: /vault/vault-config.hcl
   
 
