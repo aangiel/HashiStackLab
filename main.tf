@@ -27,7 +27,7 @@ resource "oci_core_subnet" "hashistack" {
   cidr_block        = var.subnet_cidr_block
   compartment_id    = var.compartment_ocid
   vcn_id            = oci_core_vcn.hashistack.id
-  route_table_id    = oci_core_route_table.hashistack_route_table.id
+  route_table_id    = oci_core_vcn.hashistack.default_route_table_id #oci_core_route_table.hashistack_route_table.id
   security_list_ids = [oci_core_vcn.hashistack.default_security_list_id, oci_core_security_list.hashistack_sec_list.id]
 }
 
@@ -48,24 +48,24 @@ resource "oci_core_security_list" "hashistack_sec_list" {
   }
 }
 
-resource "oci_core_route_table" "hashistack_route_table" {
-  vcn_id         = oci_core_vcn.hashistack.id
-  compartment_id = var.tenancy_ocid
-  display_name   = "Hashistack Route Table"
+# resource "oci_core_route_table" "hashistack_route_table" {
+#   vcn_id         = oci_core_vcn.hashistack.id
+#   compartment_id = var.tenancy_ocid
+#   display_name   = "Hashistack Route Table"
 
-  route_rules {
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
-  }
+#   route_rules {
+#     destination       = "0.0.0.0/0"
+#     destination_type  = "CIDR_BLOCK"
+#     network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
+#   }
 
-}
+# }
 
 resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
   compartment_id = var.tenancy_ocid
   display_name   = "HashiStack Internet Gateway"
   vcn_id         = oci_core_vcn.hashistack.id
-  route_table_id = oci_core_route_table.hashistack_route_table.id
+  route_table_id = oci_core_vcn.hashistack.default_route_table_id
 
 }
 
