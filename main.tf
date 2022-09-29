@@ -36,9 +36,9 @@ resource "oci_core_route_table" "hashistack_route_table" {
   display_name   = "Hashistack Route Table"
 
   route_rules {
-    destination      = "10.0.1.0/24"
+    destination      = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
-    # network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
+    network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
   }
 
 }
@@ -47,7 +47,6 @@ resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
   compartment_id = var.tenancy_ocid
   display_name = "HashiStack Internet Gateway"
   vcn_id         = oci_core_vcn.hashistack.id
-  route_table_id = oci_core_route_table.hashistack_route_table.id
 
 }
 
