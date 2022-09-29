@@ -7,7 +7,7 @@ bootcmd:
 runcmd:
   - mkdir -p ~/vault/data
   - vault server -config=~/vault-config.hcl
-  
+
 
 package_update: true
 package_upgrade: true
@@ -23,7 +23,7 @@ snap:
     02: ['install', 'consul']
 
 write_files:
-  content: |
+- content: |
     storage "raft" {
       path    = "./vault/data"
       node_id = ${node_id}
