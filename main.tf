@@ -28,6 +28,18 @@ resource "oci_core_subnet" "hashistack" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.hashistack.id
   route_table_id = oci_core_route_table.hashistack_route_table.id
+  security_list_ids = [oci_core_security_list.hashistack_sec_list.id]
+}
+
+resource "oci_core_security_list" "hashistack_sec_list" {
+  compartment_id = var.compartment_ocid
+  display_name = "HashiStack Security List"
+  vcn_id         = oci_core_vcn.hashistack.id
+
+  ingress_security_rules {
+    protocol = "tcp"
+    source = "0.0.0.0/0"
+  }
 }
 
 resource "oci_core_route_table" "hashistack_route_table" {
