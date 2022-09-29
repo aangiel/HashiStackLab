@@ -108,7 +108,7 @@ resource "oci_core_instance" "arm" {
     ssh_authorized_keys = var.ssh_public_key
     user_data = base64encode(templatefile("./user-data.tftpl",
       {
-        node_id = oci_core_instance.arm[count.index].display_name
+        node_id = "hashi-arm-${count.index}"
     }))
   }
 }
@@ -141,7 +141,7 @@ resource "oci_core_instance" "amd" {
     ssh_authorized_keys = var.ssh_public_key
     user_data = base64encode(templatefile("./user-data.tftpl",
       {
-        node_id = oci_core_instance.arm[count.index].display_name
+        node_id = "hashi-amd-${count.index}"
     }))
   }
 }
