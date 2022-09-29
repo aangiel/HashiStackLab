@@ -87,6 +87,7 @@ resource "oci_core_instance" "arm" {
   compartment_id      = var.compartment_ocid
   shape               = var.arm_shape_name
   count               = 2
+  display_name = "hashi_"
 
   source_details {
     source_type = "image"
@@ -95,6 +96,7 @@ resource "oci_core_instance" "arm" {
 
   create_vnic_details {
     subnet_id = oci_core_subnet.hashistack.id
+    hostname_label = "hashi_"
   }
 
   shape_config {
@@ -120,6 +122,7 @@ resource "oci_core_instance" "amd" {
   compartment_id      = var.compartment_ocid
   shape               = var.amd_shape_name
   count               = 2
+  display_name = "hashi_"
 
   source_details {
     source_type = "image"
@@ -128,6 +131,7 @@ resource "oci_core_instance" "amd" {
 
   create_vnic_details {
     subnet_id = oci_core_subnet.hashistack.id
+    hostname_label = "hashi_"
   }
 
   metadata = {
