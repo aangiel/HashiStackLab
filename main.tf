@@ -37,7 +37,7 @@ resource "oci_core_security_list" "hashistack_sec_list" {
   vcn_id         = oci_core_vcn.hashistack.id
 
   ingress_security_rules {
-    protocol = "tcp"
+    protocol = "6"
     source = "0.0.0.0/0"
   }
 }
