@@ -149,11 +149,6 @@ resource "google_compute_instance" "test" {
     }
   }
 
-  // Local SSD disk
-  scratch_disk {
-    interface = "SCSI"
-  }
-
   network_interface {
     network = "default"
 
