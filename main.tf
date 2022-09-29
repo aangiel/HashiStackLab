@@ -54,7 +54,7 @@ resource "oci_bastion_bastion" "hashistack_bastion" {
 	bastion_type = "standard"
 	compartment_id = var.tenancy_ocid
 	target_subnet_id = oci_core_subnet.hashistack.id
-	name = "HashiStack Bastion"
+	name = "HashiStackBastion"
 }
 
 data "oci_core_image" "ubuntu" {
