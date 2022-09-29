@@ -87,7 +87,7 @@ resource "oci_core_instance" "arm" {
   compartment_id      = var.compartment_ocid
   shape               = var.arm_shape_name
   count               = 2
-  display_name = "hashi-arm-${count.index}"
+  display_name        = "hashi-arm-${count.index}"
 
   source_details {
     source_type = "image"
@@ -95,7 +95,7 @@ resource "oci_core_instance" "arm" {
   }
 
   create_vnic_details {
-    subnet_id = oci_core_subnet.hashistack.id
+    subnet_id      = oci_core_subnet.hashistack.id
     hostname_label = "hashi-arm-${count.index}"
   }
 
@@ -106,7 +106,10 @@ resource "oci_core_instance" "arm" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
-    user_data           = base64encode(file("./user-data"))
+    user_data = base64encode(templatefile("./user-data.tftpl",
+      {
+        node_id = oci_core_instance.arm.display_name
+    }))
   }
 }
 
@@ -122,7 +125,7 @@ resource "oci_core_instance" "amd" {
   compartment_id      = var.compartment_ocid
   shape               = var.amd_shape_name
   count               = 2
-  display_name = "hashi-amd-${count.index}"
+  display_name        = "hashi-amd-${count.index}"
 
   source_details {
     source_type = "image"
@@ -130,13 +133,16 @@ resource "oci_core_instance" "amd" {
   }
 
   create_vnic_details {
-    subnet_id = oci_core_subnet.hashistack.id
+    subnet_id      = oci_core_subnet.hashistack.id
     hostname_label = "hashi-amd-${count.index}"
   }
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
-    user_data           = base64encode(file("./user-data"))
+    user_data = base64encode(templatefile("./user-data.tftpl",
+      {
+        node_id = oci_core_instance.arm.display_name
+    }))
   }
 }
 

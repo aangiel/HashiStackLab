@@ -4,13 +4,38 @@ bootcmd:
   - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
   - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
+runcmd:
+  - mkdir -p ~/vault/data
+  - vault server -config=~/vault-config.hcl
+
 package_update: true
 package_upgrade: true
 package_reboot_if_required: true
 packages:
   - nomad
 
+
+
 snap:
   commands:
     00: ['install', 'vault']
     02: ['install', 'consul']
+
+write_files:
+  content: |
+    storage "raft" {
+      path    = "./vault/data"
+      node_id = ${node_id}
+    }
+
+    listener "tcp" {
+      address     = "127.0.0.1:8200"
+      tls_disable = "true"
+    }
+
+    api_addr = "http://127.0.0.1:8200"
+    cluster_addr = "https://127.0.0.1:8201"
+    ui = true
+  path: ~/vault-config.hcl
+  
+
