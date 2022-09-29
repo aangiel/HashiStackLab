@@ -55,6 +55,7 @@ resource "oci_bastion_bastion" "hashistack_bastion" {
 	compartment_id = var.tenancy_ocid
 	target_subnet_id = oci_core_subnet.hashistack.id
 	name = "HashiStackBastion"
+  client_cidr_block_allow_list = ["0.0.0.0/0"]
 }
 
 data "oci_core_image" "ubuntu" {
