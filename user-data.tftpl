@@ -14,13 +14,8 @@ package_upgrade: true
 package_reboot_if_required: true
 packages:
   - nomad
-
-
-
-snap:
-  commands:
-    00: ['install', 'vault']
-    02: ['install', 'consul']
+  - vault
+  - consul
 
 write_files:
 - content: |
