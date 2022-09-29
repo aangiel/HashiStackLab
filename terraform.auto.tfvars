@@ -6,4 +6,4 @@
 vcn_cidr_block    = "10.0.0.0/16"
 subnet_cidr_block = "10.0.1.0/24"
 # ssh_public_key    = "~/.ssh/arturangiel_rsa.pub"
-image_ocid        = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaj6g2lci5ed7nfhk46olwkhmwkzrobyo3jntnhkk7fnm2vqflorna"
+image_ocid = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaj6g2lci5ed7nfhk46olwkhmwkzrobyo3jntnhkk7fnm2vqflorna"

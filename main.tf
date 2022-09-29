@@ -8,7 +8,7 @@ provider "oci" {
 
 provider "google" {
   project = "total-well-310016"
-  region = "us-east1"
+  region  = "us-east1"
 }
 
 resource "oci_core_vcn" "hashistack" {
@@ -23,9 +23,32 @@ resource "oci_core_vcn" "hashistack" {
 
 resource "oci_core_subnet" "hashistack" {
   display_name   = "HashiStack"
+  dns_label      = "hashistack-sn"
   cidr_block     = var.subnet_cidr_block
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.hashistack.id
+  route_table_id = oci_core_route_table.hashistack_route_table.id
+}
+
+resource "oci_core_route_table" "hashistack_route_table" {
+  vcn_id         = oci_core_vcn.hashistack.id
+  compartment_id = var.tenancy_ocid
+  display_name   = "Hashistack Route Table"
+
+  route_rules {
+    destination      = "10.0.1.0/24"
+    destination_type = "CIDR_BLOCK"
+    network_entity_id = oci_core_internet_gateway.hashistack_internet_gateway.id
+  }
+
+}
+
+resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
+  compartment_id = var.tenancy_ocid
+  display_name = "HashiStack Internet Gateway"
+  vcn_id         = oci_core_vcn.hashistack.id
+  route_table_id = oci_core_route_table.hashistack_route_table.id
+
 }
 
 data "oci_core_image" "ubuntu" {
@@ -56,7 +79,7 @@ resource "oci_core_instance" "arm" {
   availability_domain = data.oci_identity_availability_domain.ad2.name
   compartment_id      = var.compartment_ocid
   shape               = var.arm_shape_name
-  count = 2
+  count               = 2
 
   source_details {
     source_type = "image"
@@ -68,7 +91,7 @@ resource "oci_core_instance" "arm" {
   }
 
   shape_config {
-    ocpus = 2
+    ocpus         = 2
     memory_in_gbs = 12
   }
 
@@ -81,7 +104,7 @@ resource "oci_core_instance" "amd" {
   availability_domain = data.oci_identity_availability_domain.ad1.name
   compartment_id      = var.compartment_ocid
   shape               = var.amd_shape_name
-  count = 2
+  count               = 2
 
   source_details {
     source_type = "image"
@@ -108,7 +131,7 @@ resource "google_compute_instance" "test" {
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      type = "pd-standard"
+      type  = "pd-standard"
     }
   }
 
