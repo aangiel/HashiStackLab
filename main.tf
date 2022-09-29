@@ -65,6 +65,7 @@ resource "oci_core_internet_gateway" "hashistack_internet_gateway" {
   compartment_id = var.tenancy_ocid
   display_name   = "HashiStack Internet Gateway"
   vcn_id         = oci_core_vcn.hashistack.id
+  route_table_id = oci_core_route_table.hashistack_route_table.id
 
 }
 
