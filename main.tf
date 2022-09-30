@@ -34,9 +34,26 @@ module "vcn_subnet" {
   }
 }
 
+resource "oci_core_security_list" "hashistack_sec_list" {
+  compartment_id = var.compartment_ocid
+  display_name   = "HashiStack Security List"
+  vcn_id         = module.vcn.vcn_id
+
+  ingress_security_rules {
+    protocol = "6" # TCP
+    source   = "0.0.0.0/0"
+    tcp_options {
+      source_port_range {
+        min = 8200
+        max = 8200
+      }
+    }
+  }
+}
+
 module "compute-instance" {
   source  = "oracle-terraform-modules/compute-instance/oci"
-  version = "2.4.0"
+  version = ">=2.4.0"
 
   ad_number                   = 2
   boot_volume_size_in_gbs     = 50
