@@ -14,7 +14,9 @@ module "vcn" {
   create_internet_gateway = true
   label_prefix            = "hashi"
   vcn_dns_label           = "hashi"
-  vcn_name                = "hashi"
+  vcn_name                = "vcn"
+  lockdown_default_seclist = false
+  subnets = module.vcn_subnet
 }
 
 module "vcn_subnet" {
