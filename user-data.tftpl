@@ -21,17 +21,39 @@ packages:
 
 write_files:
 - content: |
-    storage "raft" {
-      path    = "/home/ubuntu/vault/data"
-    }
+    %{ if vault_transit_instance }
+      storage "inmem" {}
+    %{ else }
+      storage "raft" {
+        path    = "/home/ubuntu/vault/data"
+
+        %{ if vault_follower_instance }
+          retry_join {
+            leader_api_addr = "http://hashi-arm-1:8200"
+          }
+        %{ endif }
+      }
+    %{ endif }
 
     listener "tcp" {
       address     = "0.0.0.0:8200"
       tls_disable = "true"
     }
 
-    api_addr = "http://0.0.0.0:8200"
-    cluster_addr = "https://0.0.0.0:8201"
-    ui = true
+    %{ if vault_leader_instance || vault_follower_instance }
+      seal "transit" {
+        address            = "http://hashi-amd-1:8200"
+        disable_renewal    = "false"
+        // Key configuration
+        key_name           = "unseal_key"
+        mount_path         = "transit/"
+      }
+
+      api_addr = "http://0.0.0.0:8200"
+      cluster_addr = "https://0.0.0.0:8201"
+      ui = true
+    %{ endif }
+
+    disable_mlock = true
   path: /home/ubuntu/vault/vault-config.hcl
   owner: ubuntu:ubuntu
