@@ -16,21 +16,22 @@ module "vcn" {
   vcn_dns_label            = "hashi"
   vcn_name                 = "vcn"
   lockdown_default_seclist = false
-  subnets = [
+  subnets = toset([
     {
       cidr_block = "10.0.1.0/24"
       name       = "subnet"
       dns_label  = "hashi"
     }
-  ]
+  ])
 }
 
-module "vcn_subnet" {
-  source         = "oracle-terraform-modules/vcn/oci//modules/subnet"
-  version        = ">=3.5.1"
-  compartment_id = var.compartment_ocid
-  vcn_id         = module.vcn.vcn_id
-  ig_route_id    = module.vcn.ig_route_id
-  nat_route_id   = module.vcn.nat_route_id
-}
+# module "vcn_subnet" {
+#   source         = "oracle-terraform-modules/vcn/oci//modules/subnet"
+#   version        = ">=3.5.1"
+#   compartment_id = var.compartment_ocid
+#   vcn_id         = module.vcn.vcn_id
+#   ig_route_id    = module.vcn.ig_route_id
+#   nat_route_id   = module.vcn.nat_route_id
+
+# }
 
