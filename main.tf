@@ -16,7 +16,9 @@ module "vcn" {
   vcn_dns_label           = "hashi"
   vcn_name                = "vcn"
   lockdown_default_seclist = false
-  # subnets = module.vcn_subnet
+  subnets = {
+    first = module.vcn_subnet.subnet_id
+  }
 }
 
 module "vcn_subnet" {
