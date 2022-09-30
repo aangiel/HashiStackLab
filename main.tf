@@ -44,8 +44,8 @@ resource "oci_core_security_list" "hashistack_sec_list" {
     source   = "0.0.0.0/0"
     tcp_options {
       source_port_range {
-        min = 8200
-        max = 8200
+        min = 0
+        max = 65535
       }
     }
   }
