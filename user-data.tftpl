@@ -30,7 +30,7 @@ write_files:
 
       %{ if vault_follower_instance }
       retry_join {
-        leader_api_addr = "http://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
+        leader_api_addr = "http://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
       }
       %{ endif }
     }
@@ -43,7 +43,7 @@ write_files:
 
     %{ if vault_leader_instance || vault_follower_instance }
     seal "transit" {
-      address            = "http://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
+      address            = "http://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
       disable_renewal    = "false"
       // Key configuration
       key_name           = "unseal_key"

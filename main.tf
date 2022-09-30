@@ -73,9 +73,9 @@ module "arm-compute-instance-1" {
   instance_display_name = "hashi-arm-1"
   shape                 = "VM.Standard.A1.Flex"
   user_data = base64encode(templatefile("./user-data.tftpl", {
-    vault_leader_instance   = true
+    vault_leader_instance   = false
     vault_follower_instance = false
-    vault_transit_instance  = false
+    vault_transit_instance  = true
   }))
   public_ip = "EPHEMERAL"
 
@@ -105,8 +105,8 @@ module "arm-compute-instance-2" {
   instance_display_name = "hashi-arm-2"
   shape                 = "VM.Standard.A1.Flex"
   user_data = base64encode(templatefile("./user-data.tftpl", {
-    vault_leader_instance   = false
-    vault_follower_instance = true
+    vault_leader_instance   = true
+    vault_follower_instance = false
     vault_transit_instance  = false
   }))
   public_ip = "EPHEMERAL"
@@ -138,8 +138,8 @@ module "amd-compute-instance-1" {
   shape                 = "VM.Standard.E2.1.Micro"
   user_data = base64encode(templatefile("./user-data.tftpl", {
     vault_leader_instance   = false
-    vault_follower_instance = false
-    vault_transit_instance  = true
+    vault_follower_instance = true
+    vault_transit_instance  = false
   }))
   public_ip = "EPHEMERAL"
 
