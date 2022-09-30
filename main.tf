@@ -69,7 +69,7 @@ module "compute-instance" {
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-arm"
-  instance_count              = 2
+  instance_count              = 1
   instance_display_name       = "hashi-arm"
   shape                       = "VM.Standard.A1.Flex"
   user_data                   = base64encode(templatefile("./user-data.tftpl", {}))
