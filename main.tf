@@ -24,4 +24,29 @@ module "vcn" {
   }
 }
 
+module "arm-instances" {
+  source  = "oracle-terraform-modules/compute-instance/oci"
+  version = "2.4.0-RC1"
+
+  ad_number                   = 2
+  boot_volume_size_in_gbs     = 20
+  compartment_ocid            = var.compartment_ocid
+  instance_flex_memory_in_gbs = 12
+  instance_flex_ocpus         = 2
+  public_ip_display_name      = "arm"
+  source_ocid                 = var.image_ocid
+  ssh_public_keys             = file("./public-keys")
+  subnet_ocids                = [module.vcn.subnet_id]
+  hostname_label              = "hashi-arm-${count.index}"
+  instance_count              = 2
+  instance_display_name       = "hashi-arm-${count.index}"
+  shape                       = "VM.Standard.A1.Flex"
+  user_data = base64encode(templatefile("./user-data.tftpl",
+    {
+      node_id = "hashi-arm-${count.index}"
+    }
+  ))
+
+}
+
 
