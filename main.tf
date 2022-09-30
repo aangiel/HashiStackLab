@@ -19,8 +19,7 @@ module "vcn" {
 }
 
 module "vcn_subnet" {
-  source         = "oracle-terraform-modules/vcn/oci//modules/subnet"
-  version        = ">=3.5.1"
+  source         = "./modules/subnet"
   compartment_id = var.compartment_ocid
   ig_route_id    = module.vcn.ig_route_id
   nat_route_id   = module.vcn.nat_route_id
@@ -28,14 +27,17 @@ module "vcn_subnet" {
 
   subnets = {
     subnet = {
-      cidr_block = "10.0.1.0/24"
-      dns_label  = "subnet"
+      cidr_block        = "10.0.1.0/24"
+      dns_label         = "subnet"
+      security_list_ids = [module.vcn.vcn_all_attributes.default_security_list_id, oci_core_security_list.hashistack_sec_list]
     }
   }
 }
 
-resource "oci_core_default_security_list" "default-security-list" {
-  manage_default_resource_id = module.vcn.vcn_all_attributes.default_security_list_id
+resource "oci_core_security_list" "hashistack_sec_list" {
+  compartment_id = var.compartment_ocid
+  display_name   = "HashiStack Security List"
+  vcn_id         = module.vcn.vcn_id
 
   ingress_security_rules {
     protocol = "6" # TCP
@@ -48,7 +50,6 @@ resource "oci_core_default_security_list" "default-security-list" {
     }
   }
 }
-
 
 module "compute-instance" {
   source  = "oracle-terraform-modules/compute-instance/oci"
