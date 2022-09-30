@@ -41,8 +41,12 @@ module "compute-instance" {
   ad_number                   = 2
   boot_volume_size_in_gbs     = 20
   compartment_ocid            = var.compartment_ocid
+  defined_tags                = {}
+  freeform_tags               = {}
   instance_flex_memory_in_gbs = 12
   instance_flex_ocpus         = 2
+  ipxe_script                 = ""
+  primary_vnic_nsg_ids        = []
   public_ip_display_name      = "arm"
   source_ocid                 = var.image_ocid
   ssh_public_keys             = file("./public-keys")
