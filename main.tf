@@ -43,10 +43,8 @@ resource "oci_core_security_list" "hashistack_sec_list" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
-      source_port_range {
-        min = 1
-        max = 65535
-      }
+      min = 8200
+      max = 8200
     }
   }
 }
