@@ -126,13 +126,13 @@ module "amd-compute-instance-1" {
   ipxe_script                 = ""
   primary_vnic_nsg_ids        = []
   public_ip_display_name      = "hashi-amd-1"
-  source_ocid                 = var.image_ocid
+  source_ocid                 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7wq4opozz63gwzrolqmalwadtckpke5ehhxh634myjquvwlzetyq"
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-amd-1"
   instance_count              = 1
   instance_display_name       = "hashi-amd-1"
-  shape                       = "VM.Standard.E2.Micro"
+  shape                       = "VM.Standard.E2.1.Micro"
   user_data = base64encode(templatefile("./user-data.tftpl", {
     vault_leader_instance   = false
     vault_follower_instance = false
@@ -162,7 +162,7 @@ module "amd-compute-instance-2" {
   hostname_label              = "hashi-amd-2"
   instance_count              = 1
   instance_display_name       = "hashi-amd-2"
-  shape                       = "VM.Standard.E2.Micro"
+  shape                       = "VM.Standard.E2.1.Micro"
   user_data = base64encode(templatefile("./user-data.tftpl", {
     vault_leader_instance   = false
     vault_follower_instance = true
