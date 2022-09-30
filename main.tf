@@ -34,7 +34,7 @@ module "vcn_subnet" {
   }
 }
 
-module "arm-instances" {
+module "compute-instance" {
   source  = "oracle-terraform-modules/compute-instance/oci"
   version = "2.4.0-RC1"
 
