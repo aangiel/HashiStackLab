@@ -156,7 +156,7 @@ module "amd-compute-instance-2" {
   ipxe_script                 = ""
   primary_vnic_nsg_ids        = []
   public_ip_display_name      = "hashi-amd-2"
-  source_ocid                 = var.image_ocid
+  source_ocid                 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7wq4opozz63gwzrolqmalwadtckpke5ehhxh634myjquvwlzetyq"
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-amd-2"
