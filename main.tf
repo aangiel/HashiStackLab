@@ -29,7 +29,7 @@ module "vcn_subnet" {
     subnet = {
       cidr_block        = "10.0.1.0/24"
       dns_label         = "subnet"
-      security_list_ids = [module.vcn.vcn_all_attributes.default_security_list_id, oci_core_security_list.hashistack_sec_list.id]
+      security_list_ids = [oci_core_security_list.hashistack_sec_list.id]
     }
   }
 }
