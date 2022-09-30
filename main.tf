@@ -70,7 +70,6 @@ module "arm-compute-instance-1" {
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-arm-1"
-  instance_count              = "1"
   instance_display_name       = "hashi-arm-1"
   shape                       = "VM.Standard.A1.Flex"
   user_data = base64encode(templatefile("./user-data.tftpl", {
@@ -100,7 +99,6 @@ module "arm-compute-instance-2" {
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-arm-2"
-  instance_count              = "1"
   instance_display_name       = "hashi-arm-2"
   shape                       = "VM.Standard.A1.Flex"
   user_data = base64encode(templatefile("./user-data.tftpl", {
@@ -130,7 +128,6 @@ module "amd-compute-instance-1" {
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-amd-1"
-  instance_count              = "1"
   instance_display_name       = "hashi-amd-1"
   shape                       = "VM.Standard.E2.1.Micro"
   user_data = base64encode(templatefile("./user-data.tftpl", {
@@ -160,7 +157,6 @@ module "amd-compute-instance-2" {
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-amd-2"
-  instance_count              = "1"
   instance_display_name       = "hashi-amd-2"
   shape                       = "VM.Standard.E2.1.Micro"
   user_data = base64encode(templatefile("./user-data.tftpl", {
