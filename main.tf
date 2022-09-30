@@ -37,15 +37,11 @@ module "arm-instances" {
   source_ocid                 = var.image_ocid
   ssh_public_keys             = file("./public-keys")
   subnet_ocids                = [module.vcn.subnet_id]
-  hostname_label              = "hashi-arm-${count.index}"
+  hostname_label              = "hashi-arm"
   instance_count              = 2
-  instance_display_name       = "hashi-arm-${count.index}"
+  instance_display_name       = "hashi-arm"
   shape                       = "VM.Standard.A1.Flex"
-  user_data = base64encode(templatefile("./user-data.tftpl",
-    {
-      node_id = "hashi-arm-${count.index}"
-    }
-  ))
+  user_data                   = base64encode(templatefile("./user-data.tftpl", {}))
 
 }
 
