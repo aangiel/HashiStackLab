@@ -10,15 +10,19 @@ module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
   version = ">=3.5.1"
 
-  compartment_id          = var.compartment_ocid
-  create_internet_gateway = true
-  label_prefix            = "hashi"
-  vcn_dns_label           = "hashi"
-  vcn_name                = "vcn"
+  compartment_id           = var.compartment_ocid
+  create_internet_gateway  = true
+  label_prefix             = "hashi"
+  vcn_dns_label            = "hashi"
+  vcn_name                 = "vcn"
   lockdown_default_seclist = false
-  subnets = {
-    first = module.vcn_subnet.subnet_id
-  }
+  subnets = [
+    {
+      cidr_block = "10.0.1.0/24"
+      name       = "subnet"
+      dns_label  = "hashi"
+    }
+  ]
 }
 
 module "vcn_subnet" {
@@ -28,12 +32,5 @@ module "vcn_subnet" {
   vcn_id         = module.vcn.vcn_id
   ig_route_id    = module.vcn.ig_route_id
   nat_route_id   = module.vcn.nat_route_id
-  subnets = {
-    first = {
-      cidr_block = "10.0.1.0/24"
-      name = "subnet"
-      dns_label = "hashi"
-    }
-  }
 }
 
