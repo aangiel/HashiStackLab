@@ -28,5 +28,12 @@ module "vcn_subnet" {
   vcn_id         = module.vcn.vcn_id
   ig_route_id    = module.vcn.ig_route_id
   nat_route_id   = module.vcn.nat_route_id
+  subnets = {
+    first = {
+      cidr_block = "10.0.1.0/24"
+      name = "subnet"
+      dns_label = "hashi"
+    }
+  }
 }
 
