@@ -16,14 +16,11 @@ module "vcn" {
   vcn_dns_label            = "hashi"
   vcn_name                 = "vcn"
   lockdown_default_seclist = false
-  subnets = toset([ <<EOF
-    {
+  subnets = {
+    first = {
       cidr_block = "10.0.1.0/24"
-      name       = "subnet"
-      dns_label  = "hashi"
     }
-    EOF
-  ])
+  }
 }
 
 # module "vcn_subnet" {
