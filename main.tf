@@ -34,10 +34,8 @@ module "vcn_subnet" {
   }
 }
 
-resource "oci_core_security_list" "hashistack_sec_list" {
-  compartment_id = var.compartment_ocid
-  display_name   = "HashiStack Security List"
-  vcn_id         = module.vcn.vcn_id
+resource "oci_core_default_security_list" "default-security-list" {
+  manage_default_resource_id = module.vcn.vcn_all_attributes.default_security_list_id
 
   ingress_security_rules {
     protocol = "6" # TCP
@@ -50,6 +48,7 @@ resource "oci_core_security_list" "hashistack_sec_list" {
     }
   }
 }
+
 
 module "compute-instance" {
   source  = "oracle-terraform-modules/compute-instance/oci"
