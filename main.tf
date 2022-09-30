@@ -138,7 +138,6 @@ module "amd-compute-instance-1" {
   }))
   public_ip = "EPHEMERAL"
   depends_on = [
-    module.arm-compute-instance-1,
     module.arm-compute-instance-2
   ]
 }
@@ -170,7 +169,6 @@ module "amd-compute-instance-2" {
   }))
   public_ip = "EPHEMERAL"
   depends_on = [
-    module.arm-compute-instance-1,
     module.arm-compute-instance-2
   ]
 }
