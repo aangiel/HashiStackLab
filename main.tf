@@ -36,7 +36,7 @@ module "vcn_subnet" {
 
 module "compute-instance" {
   source  = "oracle-terraform-modules/compute-instance/oci"
-  version = "2.4.0-RC1"
+  version = "2.4.0"
 
   ad_number                   = 2
   boot_volume_size_in_gbs     = 20
