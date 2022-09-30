@@ -56,6 +56,7 @@ module "compute-instance" {
   instance_display_name       = "hashi-arm"
   shape                       = "VM.Standard.A1.Flex"
   user_data                   = base64encode(templatefile("./user-data.tftpl", {}))
+  public_ip                   = "EPHEMERAL"
 
 }
 
