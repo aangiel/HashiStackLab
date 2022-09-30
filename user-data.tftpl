@@ -6,6 +6,7 @@ bootcmd:
 
 runcmd:
   - iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 8200 -j ACCEPT
+  - iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 8201 -j ACCEPT
   - echo "VAULT_RAFT_NODE_ID=$(cat /etc/hostname)" >> /etc/environment
   - mkdir -p /home/ubuntu/vault/data
   - vault server -config=/home/ubuntu/vault/vault-config.hcl
@@ -29,7 +30,7 @@ write_files:
 
       %{ if vault_follower_instance }
       retry_join {
-        leader_api_addr = "http://hashi-arm-1:8200"
+        leader_api_addr = "http://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
       }
       %{ endif }
     }
@@ -42,7 +43,7 @@ write_files:
 
     %{ if vault_leader_instance || vault_follower_instance }
     seal "transit" {
-      address            = "http://hashi-amd-1:8200"
+      address            = "http://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
       disable_renewal    = "false"
       // Key configuration
       key_name           = "unseal_key"
