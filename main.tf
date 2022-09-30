@@ -39,7 +39,7 @@ module "compute-instance" {
   version = "2.4.0"
 
   ad_number                   = 2
-  boot_volume_size_in_gbs     = 20
+  boot_volume_size_in_gbs     = 50
   compartment_ocid            = var.compartment_ocid
   defined_tags                = {}
   freeform_tags               = {}
