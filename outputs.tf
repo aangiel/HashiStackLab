@@ -7,9 +7,9 @@ output "vcn_attributes" {
 }
 
 output "subnet_id" {
-  value = module.vcn.subnet_id
+  value = module.vcn_subnet.subnet_id
 }
 
 output "subnet_all_attrs" {
-  value = module.vcn.subnet_all_attributes
+  value = module.vcn_subnet.all_attributes
 }

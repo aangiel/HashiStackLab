@@ -46,7 +46,7 @@ module "arm-instances" {
   public_ip_display_name      = "arm"
   source_ocid                 = var.image_ocid
   ssh_public_keys             = file("./public-keys")
-  subnet_ocids                = module.vcn_subnet.subnet_id
+  subnet_ocids                = values(module.vcn_subnet.subnet_id)
   hostname_label              = "hashi-arm"
   instance_count              = 2
   instance_display_name       = "hashi-arm"
