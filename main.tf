@@ -79,6 +79,9 @@ module "arm-compute-instance-1" {
   }))
   public_ip = "EPHEMERAL"
 
+  depends_on = [
+    module.amd-compute-instance-1
+  ]
 }
 
 module "arm-compute-instance-2" {
@@ -107,7 +110,10 @@ module "arm-compute-instance-2" {
     vault_transit_instance  = false
   }))
   public_ip = "EPHEMERAL"
-
+  depends_on = [
+    module.amd-compute-instance-1,
+    module.arm-compute-instance-1
+  ]
 }
 
 module "amd-compute-instance-1" {
@@ -165,7 +171,10 @@ module "amd-compute-instance-2" {
     vault_transit_instance  = false
   }))
   public_ip = "EPHEMERAL"
-
+  depends_on = [
+    module.amd-compute-instance-1,
+    module.arm-compute-instance-1
+  ]
 }
 
 
