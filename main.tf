@@ -15,7 +15,7 @@ module "vcn" {
   label_prefix             = "hashi"
   vcn_dns_label            = "vcn"
   vcn_name                 = "vcn"
-  lockdown_default_seclist = false
+  lockdown_default_seclist = true
 }
 
 module "vcn_subnet" {
@@ -29,7 +29,7 @@ module "vcn_subnet" {
     subnet = {
       cidr_block        = "10.0.1.0/24"
       dns_label         = "subnet"
-      security_list_ids = [oci_core_security_list.hashistack_sec_list.id]
+      security_list_ids = [module.vcn.vcn_all_attributes.default_security_list_id, oci_core_security_list.hashistack_sec_list.id]
     }
   }
 }
