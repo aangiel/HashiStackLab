@@ -9,7 +9,7 @@ runcmd:
   - iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 8201 -j ACCEPT
   - echo "VAULT_RAFT_NODE_ID=$(cat /etc/hostname)" >> /etc/environment
   - mkdir -p /home/ubuntu/vault/data
-  - vault server -config=/home/ubuntu/vault/vault-config.hcl
+  - vault server -config=/home/ubuntu/vault/vault-config.hcl -tls-skip-verify
 
 package_update: true
 package_upgrade: true
@@ -32,26 +32,26 @@ write_files:
 
     storage "raft" {
       path    = "/opt/vault/data"
-    }
 
-    retry_join {
-      leader_tls_servername   = "hashi-arm-1"
-      leader_api_addr         = "https://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
-    }
+      retry_join {
+        leader_tls_servername   = "hashi-arm-1"
+        leader_api_addr         = "https://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
+      }
 
-    retry_join {
-      leader_tls_servername   = "hashi-arm-2"
-      leader_api_addr         = "https://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
-    }
+      retry_join {
+        leader_tls_servername   = "hashi-arm-2"
+        leader_api_addr         = "https://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
+      }
 
-    retry_join {
-      leader_tls_servername   = "hashi-amd-1"
-      leader_api_addr         = "https://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
-    }
+      retry_join {
+        leader_tls_servername   = "hashi-amd-1"
+        leader_api_addr         = "https://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
+      }
 
-    retry_join {
-      leader_tls_servername   = "hashi-amd-2"
-      leader_api_addr         = "https://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
+      retry_join {
+        leader_tls_servername   = "hashi-amd-2"
+        leader_api_addr         = "https://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
+      }
     }
   path: /home/ubuntu/vault/vault-config.hcl
   owner: ubuntu:ubuntu
