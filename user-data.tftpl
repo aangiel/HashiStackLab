@@ -37,22 +37,22 @@ write_files:
 
       retry_join {
         leader_tls_servername   = "hashi-arm-1"
-        leader_api_addr         = "https://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
+        leader_api_addr         = "http://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
       }
 
       retry_join {
         leader_tls_servername   = "hashi-arm-2"
-        leader_api_addr         = "https://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
+        leader_api_addr         = "http://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
       }
 
       retry_join {
         leader_tls_servername   = "hashi-amd-1"
-        leader_api_addr         = "https://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
+        leader_api_addr         = "http://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
       }
 
       retry_join {
         leader_tls_servername   = "hashi-amd-2"
-        leader_api_addr         = "https://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
+        leader_api_addr         = "http://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
       }
     }
   path: /home/ubuntu/vault/vault-config.hcl
