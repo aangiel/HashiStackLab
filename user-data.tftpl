@@ -9,6 +9,7 @@ runcmd:
   - iptables -I INPUT 6 -p tcp -m state --state NEW -m tcp --dport 8201 -j ACCEPT
   - echo "VAULT_RAFT_NODE_ID=$(cat /etc/hostname)" >> /etc/environment
   - echo "VAULT_ADDR=http://127.0.0.1:8200" >> /etc/environment
+  - echo "OCI_CLI_CONFIG_FILE=/root/.oci/config" >> /etc/environment
   - mkdir -p /home/ubuntu/vault/data
   - vault server -config=/home/ubuntu/vault/vault-config.hcl -tls-skip-verify
 
