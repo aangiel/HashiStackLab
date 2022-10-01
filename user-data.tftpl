@@ -64,11 +64,9 @@ write_files:
       auth_type_api_key    = "true"
     }
   path: /home/ubuntu/vault/vault-config.hcl
-  owner: ubuntu:ubuntu
 - content: ${private_key}
   encoding: base64
-  path: /home/ubuntu/oci/private_key.pem
-  owner: ubuntu:ubuntu
+  path: /home/ubuntu/.oci/private_key.pem
 - content: |
     [DEFAULT]
     user="${user_ocid}"
@@ -76,5 +74,4 @@ write_files:
     tenancy="${tenancy_ocid}"
     region="${region}"
     key_file="/home/ubuntu/.oci/private_key.pem"
-  path: /home/ubuntu/oci/config
-  owner: ubuntu:ubuntu
+  path: /home/ubuntu/.oci/config
