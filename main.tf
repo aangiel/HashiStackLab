@@ -79,6 +79,11 @@ module "arm-compute-instance-1" {
     key_id                  = oci_kms_key.hashi_master_key.id
     management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
     crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
+    private_key             = var.private_key
+    user_ocid               = var.user_ocid
+    fingerprint             = var.fingerprint
+    tenancy_ocid            = var.tenancy_ocid
+    region                  = var.region
   }))
   public_ip = "EPHEMERAL"
 }
@@ -110,6 +115,11 @@ module "arm-compute-instance-2" {
     key_id                  = oci_kms_key.hashi_master_key.id
     management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
     crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
+    private_key             = var.private_key
+    user_ocid               = var.user_ocid
+    fingerprint             = var.fingerprint
+    tenancy_ocid            = var.tenancy_ocid
+    region                  = var.region
   }))
   public_ip = "EPHEMERAL"
 }
@@ -141,6 +151,11 @@ module "amd-compute-instance-1" {
     key_id                  = oci_kms_key.hashi_master_key.id
     management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
     crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
+    private_key             = var.private_key
+    user_ocid               = var.user_ocid
+    fingerprint             = var.fingerprint
+    tenancy_ocid            = var.tenancy_ocid
+    region                  = var.region
   }))
   public_ip = "EPHEMERAL"
 }
@@ -172,6 +187,11 @@ module "amd-compute-instance-2" {
     key_id                  = oci_kms_key.hashi_master_key.id
     management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
     crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
+    private_key             = var.private_key
+    user_ocid               = var.user_ocid
+    fingerprint             = var.fingerprint
+    tenancy_ocid            = var.tenancy_ocid
+    region                  = var.region
   }))
   public_ip = "EPHEMERAL"
 }
