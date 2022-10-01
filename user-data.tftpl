@@ -10,7 +10,6 @@ runcmd:
   - echo "VAULT_RAFT_NODE_ID=$(cat /etc/hostname)" >> /etc/environment
   - echo "VAULT_ADDR=http://127.0.0.1:8200" >> /etc/environment
   - mkdir -p /home/ubuntu/vault/data
-  - mkdir /home/ubuntu/.oci
   - vault server -config=/home/ubuntu/vault/vault-config.hcl -tls-skip-verify
 
 package_update: true
