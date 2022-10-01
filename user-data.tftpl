@@ -66,12 +66,12 @@ write_files:
   path: /home/ubuntu/vault/vault-config.hcl
 - content: ${private_key}
   encoding: base64
-  path: /home/ubuntu/.oci/private_key.pem
+  path: /root/.oci/private_key.pem
 - content: |
     [DEFAULT]
     user="${user_ocid}"
     fingerprint="${fingerprint}"
     tenancy="${tenancy_ocid}"
     region="${region}"
-    key_file="/home/ubuntu/.oci/private_key.pem"
-  path: /home/ubuntu/.oci/config
+    key_file="/root/.oci/private_key.pem"
+  path: /root/.oci/config
