@@ -76,6 +76,9 @@ module "arm-compute-instance-1" {
     vault_leader_instance   = false
     vault_follower_instance = false
     vault_transit_instance  = true
+    key_id                  = oci_kms_key.hashi_master_key.id
+    management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
+    crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
   }))
   public_ip = "EPHEMERAL"
 }
@@ -104,11 +107,11 @@ module "arm-compute-instance-2" {
     vault_leader_instance   = true
     vault_follower_instance = false
     vault_transit_instance  = false
+    key_id                  = oci_kms_key.hashi_master_key.id
+    management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
+    crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
   }))
   public_ip = "EPHEMERAL"
-  depends_on = [
-    module.arm-compute-instance-1
-  ]
 }
 
 module "amd-compute-instance-1" {
@@ -135,11 +138,11 @@ module "amd-compute-instance-1" {
     vault_leader_instance   = false
     vault_follower_instance = true
     vault_transit_instance  = false
+    key_id                  = oci_kms_key.hashi_master_key.id
+    management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
+    crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
   }))
   public_ip = "EPHEMERAL"
-  depends_on = [
-    module.arm-compute-instance-2
-  ]
 }
 
 module "amd-compute-instance-2" {
@@ -166,11 +169,33 @@ module "amd-compute-instance-2" {
     vault_leader_instance   = false
     vault_follower_instance = true
     vault_transit_instance  = false
+    key_id                  = oci_kms_key.hashi_master_key.id
+    management_endpoint     = oci_kms_vault.hashi_vault.management_endpoint
+    crypto_endpoint         = oci_kms_vault.hashi_vault.crypto_endpoint
   }))
   public_ip = "EPHEMERAL"
-  depends_on = [
-    module.arm-compute-instance-2
-  ]
+}
+
+resource "oci_kms_key" "hashi_master_key" {
+  #Required
+  compartment_id = var.compartment_ocid
+  display_name   = "HashiMasterKey"
+  key_shape {
+    #Required
+    algorithm = "RSA"
+    length    = "256"
+  }
+  management_endpoint = oci_kms_vault.hashi_vault.management_endpoint
+
+  protection_mode = "SOFTWARE"
+}
+
+resource "oci_kms_vault" "hashi_vault" {
+  #Required
+  compartment_id = var.compartment_ocid
+  display_name   = "HashiVault"
+  vault_type     = "DEFAULT"
+
 }
 
 

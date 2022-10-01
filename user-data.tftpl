@@ -26,6 +26,7 @@ write_files:
     cluster_addr  = "https://127.0.0.1:8201"
     api_addr      = "https://127.0.0.1:8200"
     disable_mlock = true
+    ui            = true
 
     listener "tcp" {
       address = "0.0.0.0:8200"
@@ -54,6 +55,13 @@ write_files:
         leader_tls_servername   = "hashi-amd-2"
         leader_api_addr         = "http://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
       }
+    }
+
+    seal "ocikms" {
+      key_id               = $key_id
+      crypto_endpoint      = $crypto_endpoint
+      management_endpoint  = $management_endpoint
+      auth_type_api_key    = "true"
     }
   path: /home/ubuntu/vault/vault-config.hcl
   owner: ubuntu:ubuntu
