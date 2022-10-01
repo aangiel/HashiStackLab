@@ -70,9 +70,9 @@ write_files:
   path: /root/.oci/private_key.pem
 - content: |
     [DEFAULT]
-    user="${user_ocid}"
-    fingerprint="${fingerprint}"
-    tenancy="${tenancy_ocid}"
-    region="${region}"
-    key_file="/root/.oci/private_key.pem"
+    user=${user_ocid}
+    fingerprint=${fingerprint}
+    tenancy=${tenancy_ocid}
+    region=${region}
+    key_file=/root/.oci/private_key.pem
   path: /root/.oci/config
