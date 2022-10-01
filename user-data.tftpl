@@ -67,7 +67,7 @@ write_files:
   owner: ubuntu:ubuntu
 - content: ${private_key}
   encoding: base64
-  path: /home/ubuntu/.oci/private_key.pem
+  path: /home/ubuntu/oci/private_key.pem
 - content: |
     [DEFAULT]
     user="${user_ocid}"
@@ -75,4 +75,4 @@ write_files:
     tenancy="${tenancy_ocid}"
     region="${region}"
     key_file="/home/ubuntu/.oci/private_key.pem"
-  path: /home/ubuntu/.oci/config
+  path: /home/ubuntu/oci/config
