@@ -58,9 +58,9 @@ write_files:
     }
 
     seal "ocikms" {
-      key_id               = ${key_id}
-      crypto_endpoint      = ${crypto_endpoint}
-      management_endpoint  = ${management_endpoint}
+      key_id               = "${key_id}"
+      crypto_endpoint      = "${crypto_endpoint}"
+      management_endpoint  = "${management_endpoint}"
       auth_type_api_key    = "true"
     }
   path: /home/ubuntu/vault/vault-config.hcl
