@@ -28,7 +28,7 @@ write_files:
 
     listener "tcp" {
       address = "0.0.0.0:8200"
-      disable_tls = true
+      tls_disable = true
     }
 
     storage "raft" {
