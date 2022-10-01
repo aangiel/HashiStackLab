@@ -22,38 +22,36 @@ packages:
 
 write_files:
 - content: |
-    %{ if vault_transit_instance }
-    storage "inmem" {}
-    %{ else }
-    storage "raft" {
-      path    = "/home/ubuntu/vault/data"
-
-      %{ if vault_follower_instance }
-      retry_join {
-        leader_api_addr = "http://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
-      }
-      %{ endif }
-    }
-    %{ endif }
+    cluster_addr  = "https://127.0.0.1:8201"
+    api_addr      = "https://127.0.0.1:8200"
+    disable_mlock = true
 
     listener "tcp" {
-      address     = "0.0.0.0:8200"
-      tls_disable = "true"
+      address = "0.0.0.0:8200"
     }
 
-    %{ if vault_leader_instance || vault_follower_instance }
-    seal "transit" {
-      address            = "http://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
-      disable_renewal    = "false"
-      // Key configuration
-      key_name           = "unseal_key"
-      mount_path         = "transit/"
+    storage "raft" {
+      path    = "/opt/vault/data"
     }
 
-    api_addr = "http://0.0.0.0:8200"
-    cluster_addr = "https://0.0.0.0:8201"
-    ui = true
-    %{ endif }
-    disable_mlock = true
+    retry_join {
+      leader_tls_servername   = "hashi-arm-1"
+      leader_api_addr         = "https://hashi-arm-1.subnet.vcn.oraclevcn.com:8200"
+    }
+
+    retry_join {
+      leader_tls_servername   = "hashi-arm-2"
+      leader_api_addr         = "https://hashi-arm-2.subnet.vcn.oraclevcn.com:8200"
+    }
+
+    retry_join {
+      leader_tls_servername   = "hashi-amd-1"
+      leader_api_addr         = "https://hashi-amd-1.subnet.vcn.oraclevcn.com:8200"
+    }
+
+    retry_join {
+      leader_tls_servername   = "hashi-amd-2"
+      leader_api_addr         = "https://hashi-amd-2.subnet.vcn.oraclevcn.com:8200"
+    }
   path: /home/ubuntu/vault/vault-config.hcl
   owner: ubuntu:ubuntu
